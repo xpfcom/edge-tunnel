@@ -84,6 +84,7 @@ Pages绑定自定义域名
 - `https://raw.githubusercontent.com/ImLTHQ/edge-tunnel/main/SpeedTest/LAX.txt` 洛杉矶
 - `https://raw.githubusercontent.com/ImLTHQ/edge-tunnel/main/SpeedTest/SEA.txt` 西雅图
 - `https://raw.githubusercontent.com/ImLTHQ/edge-tunnel/main/SpeedTest/SJC.txt` 圣何塞
+- `https://raw.githubusercontent.com/ImLTHQ/edge-tunnel/main/SpeedTest/LHR.txt` 伦敦
 </details>
 
 # 已适配客户端
