@@ -70,14 +70,11 @@ export default {
           const 配置生成器 = {
             v2ray: v2ray配置文件,
             clash: clash配置文件,
-            default: 提示界面,
+            default: 生成提示界面,
           };
           const 工具 = Object.keys(配置生成器).find((工具) => 用户代理.includes(工具));
           const 生成配置 = 配置生成器[工具 || "default"];
-          return new Response(生成配置(访问请求.headers.get("Host")), {
-            status: 200,
-            headers: { "Content-Type": "text/plain;charset=utf-8" },
-          });
+          return 生成配置(访问请求.headers.get("Host"));
         default:
           if (伪装网页) {
             url.hostname = 伪装网页;
@@ -85,9 +82,7 @@ export default {
             访问请求 = new Request(url, 访问请求);
             return fetch(访问请求);
           } else {
-            return new Response(生成项目介绍页面(),{
-              status: 200,
-              headers: { "Content-Type": "text/html;charset=utf-8" },});
+            return 生成项目介绍页面();
           }
       }
     } else if (读取我的请求标头 === "websocket") {
@@ -357,30 +352,42 @@ function 测试SOCKS5和反代IP() {
 }
 
 function 生成项目介绍页面() {
-  return `
+  const 项目介绍 = `
 <title>项目介绍</title>
 <style>
-body {
-  font-size: 25px;
-}
+  body {
+    font-size: 25px;
+  }
 </style>
 <pre>
 <strong>edge-tunnel</strong>
 
-这是一个基于CF Pages平台的JavaScript,在天书的基础上进行优化
+这是一个基于CF平台的JS
 <a href="https://github.com/ImLTHQ/edge-tunnel" target="_blank">点我跳转仓库</a>
-
-不要想着嫖别人订阅啦, 自己部署一个不香吗?
-
-本项目仅供教育、研究和安全测试目的而设计和开发
-旨在为安全研究人员、学术界人士及技术爱好者提供一个探索和实践网络通信技术的工具
 </pre>
-`
+`;
+
+  return new Response(项目介绍, {
+    status: 200,
+    headers: { "Content-Type": "text/html;charset=utf-8" },
+  });
 }
 
 // 订阅页面
-function 提示界面() {
-  return `请把链接导入clash或v2ray`;
+function 生成提示界面() {
+  const 提示界面 = `
+<title>订阅-${订阅路径}</title>
+<style>
+  body {
+    font-size: 25px;
+  }
+</style>
+<strong>请把链接导入clash或v2ray</strong>
+`;
+  return new Response(提示界面, {
+    status: 200,
+    headers: { "Content-Type": "text/html;charset=utf-8" },
+  });
 }
 
 function 处理优选列表(优选列表, hostName) {
@@ -398,11 +405,16 @@ function 处理优选列表(优选列表, hostName) {
 
 function v2ray配置文件(hostName) {
   const 节点列表 = 处理优选列表(优选列表, hostName);
-  return 节点列表
+  const 配置内容 = 节点列表
     .map(({ 地址, 端口, 节点名字 }) => {
       return `vless://${我的UUID}@${地址}:${端口}?encryption=none&security=tls&sni=${hostName}&fp=chrome&type=ws&host=${hostName}&path=%2F%3Fed%3D2560#${节点名字}`;
     })
     .join("\n");
+
+  return new Response(配置内容, {
+    status: 200,
+    headers: { "Content-Type": "text/plain;charset=utf-8" },
+  });
 }
 
 function clash配置文件(hostName) {
@@ -435,7 +447,7 @@ function clash配置文件(hostName) {
     .map((node) => node.proxyConfig)
     .join("\n");
 
-  return `
+  const 配置内容 = `
 proxies:
 ${节点配置}
 
@@ -493,4 +505,9 @@ rules:
   - RULE-SET,reject-ip,🛑 广告拦截
   - MATCH,🚀 节点选择
 `;
+
+  return new Response(配置内容, {
+    status: 200,
+    headers: { "Content-Type": "text/plain;charset=utf-8" },
+  });
 }

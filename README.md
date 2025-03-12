@@ -1,6 +1,6 @@
 # edge-tunnel
 
-这是一个基于CF Pages平台的JavaScript,在天书的基础上进行优化
+这是一个基于CF平台的JS
 
 新增自用spotify广告屏蔽规则集 (Clash)
 
@@ -91,13 +91,10 @@ Pages绑定自定义域名
 
 - v2ray
 - clash
-- hiddify
-- streisand(需要手动填写配置)
 
 # 未来计划
 
 - 支持sing-box
-- 支持streisand订阅
 
 # 免责声明
 
