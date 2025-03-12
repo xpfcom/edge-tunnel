@@ -477,27 +477,10 @@ ${代理配置}
   proxies:
 ${代理配置}
 
-rule-providers:
-  spotify-reject-domain:
-    type: http
-    behavior: domain
-    url: "https://raw.githubusercontent.com/ImLTHQ/edge-tunnel/main/ClashRuleSet/spotify-reject-domain.list"
-    path: ./ruleset/spotify-reject-domain.yaml
-    interval: 86400
-
-  spotify-reject-ip:
-    type: http
-    behavior: ipcidr
-    url: "https://raw.githubusercontent.com/ImLTHQ/edge-tunnel/main/ClashRuleSet/spotify-reject-ip.list"
-    path: ./ruleset/spotify-reject-ip.yaml
-    interval: 86400
-
 rules:
   - GEOIP,LAN,DIRECT
   - GEOIP,CN,🎯 CN直连
   - GEOSITE,CN,🎯 CN直连
-  - RULE-SET,spotify-reject-ip,🛑 广告拦截
-  - RULE-SET,spotify-reject-domain,🛑 广告拦截
   - MATCH,🚀 节点选择
 `;
 
