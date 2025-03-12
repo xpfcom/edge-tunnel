@@ -362,7 +362,8 @@ function 生成项目介绍页面() {
 <pre>
 <strong>edge-tunnel</strong>
 
-这是一个基于CF平台的JS, 用途仅仅是作为代理用于隐藏真实IP, 并非作为绕过防火墙的工具
+这是一个基于CF平台的脚本,
+用途仅仅是作为代理用于隐藏真实IP, 并非作为绕过防火墙的工具
 <a href="https://github.com/ImLTHQ/edge-tunnel" target="_blank">点我跳转仓库</a>
 </pre>
 `;
@@ -462,11 +463,6 @@ ${代理配置}
   proxies:
     - DIRECT
     - 🚀 节点选择
-- name: 🎯 CF规则
-  type: select
-  proxies:
-    - 🚀 节点选择
-    - DIRECT
 - name: 🛑 广告拦截
   type: select
   proxies:
@@ -482,27 +478,26 @@ ${代理配置}
 ${代理配置}
 
 rule-providers:
-  reject-domain:
+  spotify-reject-domain:
     type: http
     behavior: domain
-    url: "https://raw.githubusercontent.com/ImLTHQ/edge-tunnel/main/ClashRuleSet/reject-domain.list"
-    path: ./ruleset/reject-domain.yaml
+    url: "https://raw.githubusercontent.com/ImLTHQ/edge-tunnel/main/ClashRuleSet/spotify-reject-domain.list"
+    path: ./ruleset/spotify-reject-domain.yaml
     interval: 86400
 
-  reject-ip:
+  spotify-reject-ip:
     type: http
     behavior: ipcidr
-    url: "https://raw.githubusercontent.com/ImLTHQ/edge-tunnel/main/ClashRuleSet/reject-ip.list"
-    path: ./ruleset/reject-ip.yaml
+    url: "https://raw.githubusercontent.com/ImLTHQ/edge-tunnel/main/ClashRuleSet/spotify-reject-ip.list"
+    path: ./ruleset/spotify-reject-ip.yaml
     interval: 86400
 
 rules:
   - GEOIP,LAN,DIRECT
   - GEOIP,CN,🎯 CN直连
   - GEOSITE,CN,🎯 CN直连
-  - GEOIP,CLOUDFLARE,🎯 CF规则
-  - RULE-SET,reject-domain,🛑 广告拦截
-  - RULE-SET,reject-ip,🛑 广告拦截
+  - RULE-SET,spotify-reject-ip,🛑 广告拦截
+  - RULE-SET,spotify-reject-domain,🛑 广告拦截
   - MATCH,🚀 节点选择
 `;
 
