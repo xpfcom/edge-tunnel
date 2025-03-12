@@ -362,7 +362,7 @@ function 生成项目介绍页面() {
 <pre>
 <strong>edge-tunnel</strong>
 
-这是一个基于CF平台的JS
+这是一个基于CF平台的JS, 用途仅仅是作为代理用于隐藏真实IP, 并非作为绕过防火墙的工具
 <a href="https://github.com/ImLTHQ/edge-tunnel" target="_blank">点我跳转仓库</a>
 </pre>
 `;
