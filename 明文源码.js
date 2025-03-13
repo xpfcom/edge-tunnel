@@ -465,7 +465,6 @@ function singbox配置文件(hostName) {
     const 配置内容 = {
         log: {
             level: "info",
-            timestamp: true,
         },
         inbounds: [
             {
@@ -487,18 +486,6 @@ function singbox配置文件(hostName) {
                 type: "direct",
                 tag: "direct",
             },
-            {
-                type: "block",
-                tag: "block",
-            },
-            {
-                type: "dns",
-                tag: "dns-out",
-            },
-            {
-                type: "loopback",
-                tag: "loopback",
-            }
         ],
         dns: {
             enabled: true,
