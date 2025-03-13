@@ -497,7 +497,6 @@ function singbox配置文件(hostName) {
           enabled: true,
           server_name: hostName,
           alpn: ["h2", "http/1.1"],
-          fingerprint: "chrome",
           security: "tls",
         },
         transport: {
