@@ -483,10 +483,6 @@ function singbox配置文件(hostName) {
         tag: "proxy",
         outbounds: 节点列表.map(node => node.节点名字),
       },
-      {
-        type: "direct",
-        tag: "direct",
-      },
       ...节点列表.map(({ 地址, 端口, 节点名字 }) => ({
         type: "vless",
         tag: 节点名字,
@@ -508,12 +504,7 @@ function singbox配置文件(hostName) {
       })),
     ],
     route: {
-      rules: [
-        {
-          geoip: ["cn"],
-          outbound: "direct",
-        },
-      ],
+      rules: [],
       final: "proxy",
     },
   };
