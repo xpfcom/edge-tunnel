@@ -479,7 +479,7 @@ function singbox配置文件(hostName) {
       ],
       outbounds: [
           {
-              type: "节点选择",
+              type: "selector",
               tag: "proxy",
               outbounds: 节点列表.map(node => node.节点名字),
           },
