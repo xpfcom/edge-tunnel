@@ -25,7 +25,7 @@ let 伪装网页 = "";
 
 // 网页入口
 export default {
-  async fetch(访问请求, env, hostName) {
+  async fetch(访问请求, env) {
     订阅路径 = env.SUB_PATH ?? 订阅路径;
     我的UUID = env.SUB_UUID ?? 我的UUID;
     默认节点名称 = env.SUB_NAME ?? 默认节点名称;
@@ -56,7 +56,6 @@ export default {
             ).flat()
           ),
         ];
-        优选列表.unshift(`${hostName}#原生节点`);
       }
 
       const 最终订阅路径 = encodeURIComponent(订阅路径);
