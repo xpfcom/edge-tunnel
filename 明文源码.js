@@ -495,13 +495,13 @@ function singbox配置文件(hostName) {
             servers: [
                 {
                     tag: "cloudflare",
-                    address: "https://cloudflare-dns.com/dns-query",
+                    address: "1.1.1.1",
                     address_strategy: "ipv4_only",
                     upstream: true,
                 },
                 {
                     tag: "google",
-                    address: "https://dns.google/dns-query",
+                    address: "8.8.8.8",
                     address_strategy: "ipv4_only",
                     upstream: true,
                 }
@@ -510,27 +510,7 @@ function singbox配置文件(hostName) {
         route: {
             rules: [
                 {
-                    protocol: ["dns"],
-                    outbound: "dns-out",
-                },
-                {
-                    domain_keyword: [".arpa", ".home.arpa", ".internal", ".intranet", "localhost"],
-                    outbound: "block",
-                },
-                {
-                    ip_cidr: ["127.0.0.0/8", "10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16", "fd00::/8", "fe80::/10"],
-                    outbound: "block",
-                },
-                {
-                    geosite: ["category-ads-all"],
-                    outbound: "block",
-                },
-                {
                     geoip: ["cn"],
-                    outbound: "direct",
-                },
-                {
-                    domain: ["cn"],
                     outbound: "direct",
                 },
             ],
