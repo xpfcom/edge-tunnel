@@ -65,6 +65,7 @@ export default {
           const 配置生成器 = {
             v2ray: v2ray配置文件,
             clash: clash配置文件,
+            "sing-box": singbox配置文件,
             default: 生成提示界面,
           };
           const 工具 = Object.keys(配置生成器).find((工具) => 用户代理.includes(工具));
@@ -456,4 +457,133 @@ rules:
     status: 200,
     headers: { "Content-Type": "text/plain;charset=utf-8" },
   });
+}
+
+function singbox配置文件(hostName) {
+    const 节点列表 = 处理优选列表(优选列表, hostName);
+
+    const 配置内容 = {
+        log: {
+            level: "info",
+            timestamp: true,
+            color: true,
+        },
+        inbounds: [
+            {
+                type: "mixed",
+                tag: "mixed-in",
+                listen: "0.0.0.0",
+                listen_port: 2333,
+                sniff: true,
+                domain_strategy: "prefer_ipv4",
+            }
+        ],
+        outbounds: [
+            {
+                type: "selector",
+                tag: "proxy",
+                outbounds: 节点列表.map(node => node.节点名字),
+            },
+            {
+                type: "direct",
+                tag: "direct",
+            },
+            {
+                type: "block",
+                tag: "block",
+            },
+            {
+                type: "dns",
+                tag: "dns-out",
+            },
+            {
+                type: "loopback",
+                tag: "loopback",
+            }
+        ],
+        dns: {
+            enabled: true,
+            listen: "0.0.0.0",
+            listen_port: 2334,
+            strategy: "ipv4_only",
+            servers: [
+                {
+                    tag: "cloudflare",
+                    address: "https://cloudflare-dns.com/dns-query",
+                    address_strategy: "ipv4_only",
+                    upstream: true,
+                },
+                {
+                    tag: "google",
+                    address: "https://dns.google/dns-query",
+                    address_strategy: "ipv4_only",
+                    upstream: true,
+                }
+            ],
+        },
+        route: {
+            rules: [
+                {
+                    protocol: ["dns"],
+                    outbound: "dns-out",
+                },
+                {
+                    domain_keyword: [".arpa", ".home.arpa", ".internal", ".intranet", "localhost"],
+                    outbound: "block",
+                },
+                {
+                    ip_cidr: ["127.0.0.0/8", "10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16", "fd00::/8", "fe80::/10"],
+                    outbound: "block",
+                },
+                {
+                    geosite: ["category-ads-all"],
+                    outbound: "block",
+                },
+                {
+                    geoip: ["cn"],
+                    outbound: "direct",
+                },
+                {
+                    domain: ["cn"],
+                    outbound: "direct",
+                },
+            ],
+            auto_detect_interface: true,
+            final: "proxy",
+        },
+        experimental: {
+            cache_file: {
+                enabled: true,
+                path: "cache.db",
+            }
+        },
+        "节点": 节点列表.map(({ 地址, 端口, 节点名字 }) => ({
+            type: "vless",
+            tag: 节点名字,
+            server: 地址,
+            server_port: 端口,
+            uuid: 我的UUID,
+            security: "tls",
+            tls: {
+                enabled: true,
+                server_name: hostName,
+                alpn: ["h2", "http/1.1"],
+                fingerprint: "chrome",
+            },
+            transport: {
+                type: "ws",
+                path: "/?ed=2560",
+                headers: {
+                    Host: hostName,
+                },
+            },
+        })),
+    };
+
+    const configString = JSON.stringify(配置内容, null, 2);
+
+    return new Response(configString, {
+        status: 200,
+        headers: { "Content-Type": "application/json;charset=utf-8" },
+    });
 }
