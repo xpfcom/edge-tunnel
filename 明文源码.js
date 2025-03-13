@@ -57,11 +57,7 @@ export default {
           ),
         ];
       }
-
-      const { SOCKS5有效, 反代IP有效 } = 测试SOCKS5和反代IP();
-      if (!SOCKS5有效 && !反代IP有效) {
-        优选列表.unshift("127.0.0.1#Socks5或反代IP出错，无法访问CF CDN");
-      }
+      优选列表.unshift(`${hostName}#原生节点`);
 
       const 最终订阅路径 = encodeURIComponent(订阅路径);
       switch (url.pathname) {
@@ -318,39 +314,6 @@ function 字符串转数组(str) {
   return str.split("\n");
 }
 
-function 测试SOCKS5和反代IP() {
-  let SOCKS5有效 = true;
-  let 反代IP有效 = true;
-
-  if (SOCKS5账号) {
-    try {
-      const { 地址, 端口 } = 获取SOCKS5账号(SOCKS5账号);
-      const 测试连接 = connect({ hostname: 地址, port: 端口 });
-      测试连接.opened;
-      测试连接.close();
-    } catch (error) {
-      SOCKS5有效 = false;
-    }
-  } else {
-    SOCKS5有效 = false;
-  }
-
-  if (反代IP) {
-    try {
-      const [反代IP地址, 反代IP端口] = 反代IP.split(":");
-      const 测试连接 = connect({ hostname: 反代IP地址, port: Number(反代IP端口) || 443 });
-      测试连接.opened;
-      测试连接.close();
-    } catch (error) {
-      反代IP有效 = false;
-    }
-  } else {
-    反代IP有效 = false;
-  }
-
-  return { SOCKS5有效, 反代IP有效 };
-}
-
 function 生成项目介绍页面() {
   const 项目介绍 = `
 <title>项目介绍</title>
@@ -458,17 +421,6 @@ proxy-groups:
   proxies:
     - ♻️ 延迟优选
 ${代理配置}
-- name: 🎯 CN直连
-  type: select
-  proxies:
-    - DIRECT
-    - 🚀 节点选择
-- name: 🛑 广告拦截
-  type: select
-  proxies:
-    - REJECT
-    - DIRECT
-    - 🚀 节点选择
 - name: ♻️ 延迟优选
   type: url-test
   url: https://www.google.com/generate_204
@@ -479,8 +431,7 @@ ${代理配置}
 
 rules:
   - GEOIP,LAN,DIRECT
-  - GEOIP,CN,🎯 CN直连
-  - GEOSITE,CN,🎯 CN直连
+  - GEOIP,CN,DIRECT
   - MATCH,🚀 节点选择
 `;
 
