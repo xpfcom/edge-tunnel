@@ -464,19 +464,6 @@ function singbox配置文件(hostName) {
   const 节点列表 = 处理优选列表(优选列表, hostName);
 
   const 配置内容 = {
-    log: {
-      level: "info",
-    },
-    inbounds: [
-      {
-        type: "mixed",
-        tag: "mixed-in",
-        listen: "0.0.0.0",
-        listen_port: 2333,
-        sniff: true,
-        domain_strategy: "prefer_ipv4",
-      }
-    ],
     outbounds: [
       {
         type: "selector",
@@ -492,7 +479,6 @@ function singbox配置文件(hostName) {
         tls: {
           enabled: true,
           server_name: hostName,
-          alpn: ["h2", "http/1.1"],
         },
         transport: {
           type: "ws",
