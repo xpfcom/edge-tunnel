@@ -466,7 +466,6 @@ function singbox配置文件(hostName) {
         log: {
             level: "info",
             timestamp: true,
-            color: true,
         },
         inbounds: [
             {
