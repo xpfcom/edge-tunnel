@@ -65,7 +65,7 @@ export default {
           const 配置生成器 = {
             v2ray: v2ray配置文件,
             clash: clash配置文件,
-            singbox: singbox配置文件,
+            "sing-box": singbox配置文件,
             default: 生成提示界面,
           };
           const 工具 = Object.keys(配置生成器).find((工具) => 用户代理.includes(工具));
@@ -474,16 +474,6 @@ function singbox配置文件(hostName) {
     .join("\n");
 
   const 配置内容 = `
-inbounds:
-  - type: http
-    port: 8080
-    settings:
-      allow_transparent: false
-    sniffing:
-      enabled: true
-      dest_override:
-        - http
-        - tls
 outbounds:
 ${节点配置}
 `;
