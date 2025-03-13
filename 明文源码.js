@@ -56,8 +56,8 @@ export default {
             ).flat()
           ),
         ];
+        优选列表.unshift(`${hostName}#原生节点`);
       }
-      优选列表.unshift(`${hostName}#原生节点`);
 
       const 最终订阅路径 = encodeURIComponent(订阅路径);
       switch (url.pathname) {
