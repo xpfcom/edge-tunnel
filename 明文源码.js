@@ -367,10 +367,11 @@ function 处理优选列表(优选列表, hostName) {
 }
 
 function v2ray配置文件(hostName) {
+  const path = encodeURIComponent("/?ed=2560");
   const 节点列表 = 处理优选列表(优选列表, hostName);
   const 配置内容 = 节点列表
     .map(({ 地址, 端口, 节点名字 }) => {
-      return `vless://${我的UUID}@${地址}:${端口}?encryption=none&security=tls&sni=${hostName}&fp=chrome&type=ws&host=${hostName}&path=/?ed=2560#${节点名字}`;
+      return `vless://${我的UUID}@${地址}:${端口}?encryption=none&security=tls&sni=${hostName}&fp=chrome&type=ws&host=${hostName}&path=${path}#${节点名字}`;
     })
     .join("\n");
 
