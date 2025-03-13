@@ -460,69 +460,69 @@ rules:
 }
 
 function singbox配置文件(hostName) {
-    const 节点列表 = 处理优选列表(优选列表, hostName);
+  const 节点列表 = 处理优选列表(优选列表, hostName);
 
-    const 配置内容 = {
-        log: {
-            level: "info",
-        },
-        inbounds: [
-            {
-                type: "mixed",
-                tag: "mixed-in",
-                listen: "0.0.0.0",
-                listen_port: 2333,
-                sniff: true,
-                domain_strategy: "prefer_ipv4",
-            }
-        ],
-        outbounds: [
-            {
-                type: "selector",
-                tag: "proxy",
-                outbounds: 节点列表.map(node => node.节点名字),
-            },
-            {
-                type: "direct",
-                tag: "direct",
-            },
-        ],
-        route: {
-            rules: [
-                {
-                    geoip: ["cn"],
-                    outbound: "direct",
-                },
-            ],
-            final: "proxy",
-        },
-        "节点": 节点列表.map(({ 地址, 端口, 节点名字 }) => ({
-            type: "vless",
-            tag: 节点名字,
-            server: 地址,
-            server_port: 端口,
-            uuid: 我的UUID,
-            security: "tls",
-            tls: {
-                enabled: true,
-                server_name: hostName,
-                alpn: ["h2", "http/1.1"],
-                fingerprint: "chrome",
-            },
-            transport: {
-                type: "ws",
-                path: "/?ed=2560",
-                headers: {
-                    Host: hostName,
-                },
-            },
-        })),
-    };
+  const 配置内容 = {
+      log: {
+          level: "info",
+      },
+      inbounds: [
+          {
+              type: "mixed",
+              tag: "mixed-in",
+              listen: "0.0.0.0",
+              listen_port: 2333,
+              sniff: true,
+              domain_strategy: "prefer_ipv4",
+          }
+      ],
+      outbounds: [
+          {
+              type: "节点选择",
+              tag: "proxy",
+              outbounds: 节点列表.map(node => node.节点名字),
+          },
+          {
+              type: "direct",
+              tag: "direct",
+          },
+          ...节点列表.map(({ 地址, 端口, 节点名字 }) => ({
+              type: "vless",
+              tag: 节点名字,
+              server: 地址,
+              server_port: 端口,
+              uuid: 我的UUID,
+              security: "tls",
+              tls: {
+                  enabled: true,
+                  server_name: hostName,
+                  alpn: ["h2", "http/1.1"],
+                  fingerprint: "chrome",
+              },
+              transport: {
+                  type: "ws",
+                  path: "/?ed=2560",
+                  headers: {
+                      Host: hostName,
+                  },
+              },
+          })),
+      ],
+      route: {
+          rules: [
+              {
+                  geoip: ["cn"],
+                  outbound: "direct",
+              },
+          ],
+          final: "proxy",
+      },
+  };
 
-    const configString = JSON.stringify(配置内容, null, 2);
+  const configString = JSON.stringify(配置内容, null, 2);
 
-    return new Response(configString, {
-        status: 200,
-        headers: { "Content-Type": "application/json;charset=utf-8" },
-    });
+  return new Response(configString, {
+      status: 200,
+      headers: { "Content-Type": "application/json;charset=utf-8" },
+  });
 }
