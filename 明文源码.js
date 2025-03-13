@@ -65,7 +65,6 @@ export default {
           const 配置生成器 = {
             v2ray: v2ray配置文件,
             clash: clash配置文件,
-            "sing-box": singbox配置文件,
             default: 生成提示界面,
           };
           const 工具 = Object.keys(配置生成器).find((工具) => 用户代理.includes(工具));
@@ -434,48 +433,6 @@ rules:
   - GEOIP,LAN,DIRECT
   - GEOIP,CN,DIRECT
   - MATCH,🚀 节点选择
-`;
-
-  return new Response(配置内容, {
-    status: 200,
-    headers: { "Content-Type": "text/plain;charset=utf-8" },
-  });
-}
-
-function singbox配置文件(hostName) {
-  const 节点列表 = 处理优选列表(优选列表, hostName);
-  const 生成节点 = (节点列表) => {
-    return 节点列表.map(({ 地址, 端口, 节点名字 }) => {
-      return {
-        nodeConfig: `  - name: ${节点名字}
-    type: vless
-    server: ${地址}
-    port: ${端口}
-    uuid: ${我的UUID}
-    tls:
-      enabled: true
-      server_name: ${hostName}
-    transport:
-      type: ws
-      path: "/?ed=2560"
-      headers:
-        Host: ${hostName}
-        User-Agent: Chrome`,
-        proxyConfig: `    - ${节点名字}`,
-      };
-    });
-  };
-
-  const 节点配置 = 生成节点(节点列表)
-    .map((node) => node.nodeConfig)
-    .join("\n");
-  const 代理配置 = 生成节点(节点列表)
-    .map((node) => node.proxyConfig)
-    .join("\n");
-
-  const 配置内容 = `
-outbounds:
-${节点配置}
 `;
 
   return new Response(配置内容, {
