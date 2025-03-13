@@ -487,26 +487,6 @@ function singbox配置文件(hostName) {
                 tag: "direct",
             },
         ],
-        dns: {
-            enabled: true,
-            listen: "0.0.0.0",
-            listen_port: 2334,
-            strategy: "ipv4_only",
-            servers: [
-                {
-                    tag: "cloudflare",
-                    address: "1.1.1.1",
-                    address_strategy: "ipv4_only",
-                    upstream: true,
-                },
-                {
-                    tag: "google",
-                    address: "8.8.8.8",
-                    address_strategy: "ipv4_only",
-                    upstream: true,
-                }
-            ],
-        },
         route: {
             rules: [
                 {
@@ -514,14 +494,7 @@ function singbox配置文件(hostName) {
                     outbound: "direct",
                 },
             ],
-            auto_detect_interface: true,
             final: "proxy",
-        },
-        experimental: {
-            cache_file: {
-                enabled: true,
-                path: "cache.db",
-            }
         },
         "节点": 节点列表.map(({ 地址, 端口, 节点名字 }) => ({
             type: "vless",
