@@ -15,7 +15,7 @@ let 优选TXT = [
 ];
 let 优选列表 = [];
 
-let 反代IP = "ts.hpc.tw:443";
+let 反代IP = "ts.hpc.tw";
 
 let 启用SOCKS5全局反代 = false;
 let SOCKS5账号 = "";
