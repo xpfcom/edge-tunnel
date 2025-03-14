@@ -500,9 +500,7 @@ function singbox配置文件(hostName) {
 
   const 配置内容 = `{
 "log": {
-  "disabled": false,
   "level": "info",
-  "timestamp": true
 },
 "inbounds": [
   {
@@ -559,10 +557,6 @@ function singbox配置文件(hostName) {
 ],
 "route": {
   "rules": [
-    {
-      "geoip": "cn",
-      "outbound": "DIRECT"
-    },
     {
       "outbound": "🚀 节点选择"
     }
