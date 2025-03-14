@@ -509,15 +509,6 @@ function singbox配置文件(hostName) {
     "listen": "0.0.0.0",
     "listen_port": 2080
   },
-  {
-    "type": "tun",
-    "tag": "tun-in",
-    "inet4_address": "172.19.0.1/30",
-    "auto_route": true,
-    "strict_route": true,
-    "stack": "mixed",
-    "sniff": true
-  }
 ],
 "outbounds": [
   {
