@@ -462,42 +462,208 @@ rules:
 function singbox配置文件(hostName) {
   const 节点列表 = 处理优选列表(优选列表, hostName);
 
-  const 配置内容 = {
-    outbounds: [
-      {
-        type: "selector",
-        tag: "proxy",
-        outbounds: 节点列表.map(node => node.节点名字),
-      },
-      ...节点列表.map(({ 地址, 端口, 节点名字 }) => ({
-        type: "vless",
-        tag: 节点名字,
-        server: 地址,
-        server_port: 端口,
-        uuid: 我的UUID,
-        tls: {
-          enabled: true,
-          server_name: hostName,
-        },
-        transport: {
-          type: "ws",
-          path: "/?ed=2560",
-          headers: {
-            Host: hostName,
-          },
-        },
-      })),
-    ],
-    route: {
-      rules: [],
-      final: "proxy",
+  const 生成节点 = (节点列表) => {
+      return 节点列表.map(({ 地址, 端口, 节点名字 }) => {
+          return {
+              nodeConfig: `
+  {
+    "type": "vless",
+    "tag": "${节点名字}",
+    "server": "${地址}",
+    "server_port": ${端口},
+    "uuid": "${我的UUID}",
+    "transport": {
+      "path": "/?ed=2560",
+      "type": "ws",
+      "headers": {
+        "Host": "${hostName}"
+      }
     },
+    "tls": {
+      "enabled": true,
+      "server_name": "${hostName}",
+      "insecure": true
+    },
+    "tcp_fast_open": false
+  }`,
+              proxyConfig: `"${节点名字}"`,
+          };
+      });
   };
 
-  const configString = JSON.stringify(配置内容, null, 2);
+  const 节点配置 = 生成节点(节点列表)
+      .map((node) => node.nodeConfig)
+      .join(",\n");
+  const 代理配置 = 生成节点(节点列表)
+      .map((node) => node.proxyConfig)
+      .join(",\n");
 
-  return new Response(configString, {
-    status: 200,
-    headers: { "Content-Type": "application/json;charset=utf-8" },
+  const 配置内容 = `{
+"log": {
+  "disabled": false,
+  "level": "info",
+  "timestamp": true
+},
+"dns": {
+  "servers": [
+    {
+      "tag": "dns_proxy",
+      "address": "tls://1.1.1.1",
+      "address_resolver": "dns_resolver"
+    },
+    {
+      "tag": "dns_direct",
+      "address": "h3://dns.alidns.com/dns-query",
+      "address_resolver": "dns_resolver",
+      "detour": "DIRECT"
+    },
+    {
+      "tag": "dns_fakeip",
+      "address": "fakeip"
+    },
+    {
+      "tag": "dns_resolver",
+      "address": "223.5.5.5",
+      "detour": "DIRECT"
+    },
+    {
+      "tag": "block",
+      "address": "rcode://success"
+    }
+  ],
+  "rules": [
+    {
+      "outbound": [
+        "any"
+      ],
+      "server": "dns_resolver"
+    },
+    {
+      "geosite": [
+        "category-ads-all"
+      ],
+      "server": "dns_block",
+      "disable_cache": true
+    },
+    {
+      "geosite": [
+        "geolocation-!cn"
+      ],
+      "query_type": [
+        "A",
+        "AAAA"
+      ],
+      "server": "dns_fakeip"
+    },
+    {
+      "geosite": [
+        "geolocation-!cn"
+      ],
+      "server": "dns_proxy"
+    }
+  ],
+  "final": "dns_direct",
+  "independent_cache": true,
+  "fakeip": {
+    "enabled": true,
+    "inet4_range": "198.18.0.0/15"
+  }
+},
+"ntp": {
+  "enabled": true,
+  "server": "time.apple.com",
+  "server_port": 123,
+  "interval": "30m",
+  "detour": "DIRECT"
+},
+"inbounds": [
+  {
+    "type": "mixed",
+    "tag": "mixed-in",
+    "listen": "0.0.0.0",
+    "listen_port": 2080
+  },
+  {
+    "type": "tun",
+    "tag": "tun-in",
+    "inet4_address": "172.19.0.1/30",
+    "auto_route": true,
+    "strict_route": true,
+    "stack": "mixed",
+    "sniff": true
+  }
+],
+"outbounds": [
+  {
+    "type": "direct",
+    "tag": "DIRECT"
+  },
+  {
+    "type": "block",
+    "tag": "REJECT"
+  },
+  {
+    "type": "dns",
+    "tag": "dns-out"
+  },${节点配置},
+  {
+    "type": "selector",
+    "tag": "🚀 节点选择",
+    "outbounds": [
+      "♻️ 延迟优选",
+      ${代理配置}
+    ]
+  },
+  {
+    "type": "urltest",
+    "tag": "♻️ 延迟优选",
+    "outbounds": [
+      ${代理配置}
+    ],
+    "url": "http://www.gstatic.com/generate_204",
+    "interval": "5m",
+    "tolerance": 50
+  },
+  {
+    "type": "selector",
+    "tag": "GLOBAL",
+    "outbounds": [
+      "DIRECT",
+      ${代理配置}
+    ]
+  }
+],
+"route": {
+  "rules": [
+    {
+      "clash_mode": "Global",
+      "outbound": "GLOBAL"
+    },
+    {
+      "clash_mode": "Direct",
+      "outbound": "DIRECT"
+    },
+    {
+      "protocol": "dns",
+      "outbound": "dns-out"
+    },
+    {
+      "geoip": "lan",
+      "outbound": "DIRECT"
+    },
+    {
+      "geoip": "cn",
+      "outbound": "DIRECT"
+    }
+  ],
+  "auto_detect_interface": true,
+  "final": "🚀 节点选择"
+},
+"experimental": {}
+}`;
+
+  return new Response(配置内容, {
+      status: 200,
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
   });
 }
