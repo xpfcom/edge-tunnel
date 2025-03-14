@@ -13,10 +13,9 @@ def csv_to_txt(csv_filename,area_name):
             f.write(f"{ip}#{area_name} {i+1} ↓ {speed}MB/s\n")
 
 output_dir="SpeedTest"
-csv_to_txt("HKG.csv","中国香港")
-csv_to_txt("KHH.csv","中国台湾")
-csv_to_txt("NRT.csv","日本东京")
-csv_to_txt("LAX.csv","美国洛杉矶")
-csv_to_txt("SEA.csv","美国西雅图")
-csv_to_txt("SJC.csv","美国圣何塞")
-csv_to_txt("LHR.csv","英国伦敦")
+csv_to_txt("HKG.csv","香港")
+csv_to_txt("KHH.csv","台湾")
+csv_to_txt("SIN.csv","新加坡")
+csv_to_txt("NRT.csv","东京")
+csv_to_txt("SEA.csv","西雅图")
+csv_to_txt("LHR.csv","伦敦")
