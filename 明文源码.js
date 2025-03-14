@@ -431,11 +431,26 @@ ${代理配置}
   proxies:
 ${代理配置}
 
+rule-providers:
+  reject-domain:
+    type: http
+    behavior: domain
+    url: "https://raw.githubusercontent.com/ImLTHQ/SpotifyAdBlock/master/reject-domain.list"
+    path: ./ruleset/reject-domain.yaml
+    interval: 86400
+
+  reject-ip:
+    type: http
+    behavior: ipcidr
+    url: "https://raw.githubusercontent.com/ImLTHQ/SpotifyAdBlock/master/reject-ip.list"
+    path: ./ruleset/reject-ip.yaml
+    interval: 86400
+
 rules:
   - GEOIP,LAN,DIRECT
   - GEOIP,CN,DIRECT
-  - RULE-SET,"https://raw.githubusercontent.com/ImLTHQ/SpotifyAdBlock/master/reject-domain.list",REJECT
-  - RULE-SET,"https://raw.githubusercontent.com/ImLTHQ/SpotifyAdBlock/master/reject-ip.list",REJECT
+  - RULE-SET,reject-domain,REJECT
+  - RULE-SET,reject-ip,REJECT
   - MATCH,🚀 节点选择
 `;
 
