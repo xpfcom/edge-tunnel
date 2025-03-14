@@ -59,7 +59,7 @@ Pages绑定自定义域名
 <details>
 <summary><code><strong>「 更多ProxyIP 」</strong></code></summary>
 
-- `ts.hpc.tw:443`
+- `ts.hpc.tw`
 - `ProxyIP.US.CMLiussss.net`
 - `ProxyIP.SG.CMLiussss.net`
 - `ProxyIP.JP.CMLiussss.net`
