@@ -411,6 +411,11 @@ function clash配置文件(hostName) {
     .join("\n");
 
   const 配置内容 = `
+dns:
+  nameserver:
+    - 1.1.1.1
+    - 2606:4700:4700::1111
+
 proxies:
 ${节点配置}
 
