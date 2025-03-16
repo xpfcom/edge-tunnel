@@ -15,9 +15,9 @@ Please register a `GitHub` and `Cloudflare` (hereinafter referred to as CF) acco
 
 - Fork this project on GitHub first.
 - In the CF console, select `Workers`.
-- Click `Create`, select `Pages`.
+- Click `Create`, choose either `Workers` or `Pages`.
 - Click `Connect to Git`, select the `edge-tunnel` project, and modify the `Project name`.
-- Add environment variables according to the `Variable Description` below.
+- Add `Variables` according to the `Variable Description` below.
 - Click `Save and Deploy`.
 - It is not immediately available after deployment, it takes about 10 minutes to wait.
 - Import the subscription address `https://your_domain/subscription_path` into your Clash/V2ray client.
