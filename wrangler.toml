@@ -1,5 +1,4 @@
 name = "edge-tunnel"
 main = "_worker.js"
-compatibility_date = "2025-3-16" # 更改为今天的日期
+compatibility_date = "2025-03-16"
 workers_dev = true
-compatibility_flags = ["nodejs_compat"]
