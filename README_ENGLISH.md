@@ -54,7 +54,7 @@ Pages bind custom domain
 
 | Variable Name | Example | Remarks |
 |-|-|-|
-| SUB_PATH | `sub` | Subscription path (supports Chinese) |
+| SUB_PATH | `sub` | Subscription path |
 | SUB_UUID | `550e8400-e29b-41d4-a716-446655440000` | UUID for verification |
 | TXT_URL | `https://raw.githubusercontent.com/ImLTHQ/edge-tunnel/main/SpeedTest/HKG.txt` | Preferred IP TXT address. Supports multiple addresses separated by newlines. Format: address:port#node_name. Default port is 443 if not specified. Default node name is used if not specified. |
 | SUB_NAME | `节点` | Default node name |
