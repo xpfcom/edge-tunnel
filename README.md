@@ -12,10 +12,12 @@
 # 使用方法
 
 请先注册`GitHub`和`Cloudflare(下面简称CF)`账号
+
 - 在Github上先 Fork 本项目
 - 在CF 控制台中选择`计算(Workers)`
 - 点击`创建`, 选择`Workers`或`Pages`
-- 点击`连接到 Git`, 选中`edge-tunnel`项目, 修改`项目名称`
+- Pages请点击`连接到 Git`
+- 选中`edge-tunnel`项目, 修改最顶上的`名称`
 - 按照下面`变量说明`添加`变量`
 - 点击`保存并部署`
 - 部署完之后并非立即可用，大约10分钟左右可以访问
