@@ -1,5 +1,7 @@
 # edge-tunnel
 
+简体中文 | [English](https://github.com/ImLTHQ/edge-tunnel/blob/main/README_ENGLISH.md)
+
 这是一个基于CF 平台的脚本
 
 本人是初学者, 代码有问题欢迎指出
@@ -16,6 +18,7 @@
 - 点击`连接到 Git`, 选中`edge-tunnel`项目, 修改`项目名称`
 - 按照下面`变量说明`添加环境变量
 - 点击`保存并部署`
+- 部署完之后并非立即可用，需要等待10分钟左右
 - 在你的Clash/V2ray客户端导入订阅地址`https://域名/订阅路径`即可
 
 <details>
