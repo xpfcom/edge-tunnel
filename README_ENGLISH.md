@@ -1,6 +1,6 @@
 # edge-tunnel
 
-[简体中文](https://github.com/ImLTHQ/edge-tunnel/blob/main/README.md) | English
+# [简体中文](https://github.com/ImLTHQ/edge-tunnel/blob/main/README.md) | English
 
 This is a script based on the CF platform.
 

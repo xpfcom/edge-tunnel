@@ -1,6 +1,6 @@
 # edge-tunnel
 
-简体中文 | [English](https://github.com/ImLTHQ/edge-tunnel/blob/main/README_ENGLISH.md)
+# 简体中文 | [English](https://github.com/ImLTHQ/edge-tunnel/blob/main/README_ENGLISH.md)
 
 这是一个基于CF 平台的脚本
 
