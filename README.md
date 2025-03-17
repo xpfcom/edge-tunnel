@@ -1,7 +1,5 @@
 # edge-tunnel
 
-简体中文 | [English](https://github.com/ImLTHQ/edge-tunnel/blob/main/README_ENGLISH.md)
-
 这是一个基于CF 平台的脚本
 
 本人是初学者, 代码有问题欢迎指出
@@ -95,10 +93,6 @@ Pages绑定自定义域名
 - v2ray
 - clash
 
-# 未来计划
-
-- 支持sing-box
-
 # 免责声明
 
 本免责声明适用于 GitHub 上的 "edge-tunnel" 项目 (以下简称"本项目"), 项目链接为：`https://github.com/ImLTHQ/edge-tunnel`
@@ -126,4 +120,4 @@ Pages绑定自定义域名
 作者保留随时更新本免责声明的权利, 且不另行通知。最新版本的免责声明将发布在本项目的 GitHub 页面上。
 
 # 感谢
-[shulng](https://github.com/shulng), [XIU2](https://github.com/XIU2), [zizifn](https://github.com/zizifn), [cmliu](https://github.com/cmliu), [x0uid](https://github.com/x0uid)
+[shulng](https://github.com/shulng), [XIU2](https://github.com/XIU2), [zizifn](https://github.com/zizifn), [cmliu](https://github.com/cmliu), [x0uid](https://github.com/x0uid), [Loyalsoldier](https://github.com/Loyalsoldier)
