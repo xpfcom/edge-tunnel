@@ -366,7 +366,7 @@ function 处理优选列表(优选列表, hostName) {
 }
 
 function v2ray配置文件(hostName) {
-  const path = encodeURIComponent("/?ed=2560");
+  const path = encodeURIComponent("/?ed=9999");
   const 节点列表 = 处理优选列表(优选列表, hostName);
   const 配置内容 = 节点列表
     .map(({ 地址, 端口, 节点名字 }) => {
@@ -394,7 +394,7 @@ function clash配置文件(hostName) {
   sni: ${hostName}
   network: ws
   ws-opts:
-    path: "/?ed=2560"
+    path: "/?ed=9999"
     headers:
       Host: ${hostName}
       User-Agent: Chrome`,
@@ -415,6 +415,10 @@ dns:
   nameserver:
     - 1.1.1.1
     - 2606:4700:4700::1111
+
+geodata-mode: true
+geox-url:
+  geoip: "https://raw.githubusercontent.com/Loyalsoldier/geoip/release/cn.dat"
 
 proxies:
 ${节点配置}
