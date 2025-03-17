@@ -1,11 +1,15 @@
 # edge-tunnel
 
-这是一个基于CF 平台的脚本  本人是初学者, 代码有问题欢迎指出
+这是一个基于CF 平台的脚本
 
-[![Deploy to CF Workers](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/ImLTHQ/edge-tunnel)  部署Workers请绑定自定义域名
+本人是初学者, 代码有问题欢迎指出
 
-点个星星再走吧
+[![Deploy to CF Workers](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/ImLTHQ/edge-tunnel)
+
+部署Workers请绑定自定义域名
+
 [![Stargazers over time](https://starchart.cc/ImLTHQ/edge-tunnel.svg?variant=adaptive)](https://starchart.cc/ImLTHQ/edge-tunnel)
+点个星星再走吧
 
 # 使用方法
 
