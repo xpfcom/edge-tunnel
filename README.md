@@ -4,6 +4,8 @@
 
 本人是初学者, 代码有问题欢迎指出
 
+[![Deploy to CF Workers](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/ImLTHQ/edge-tunnel)
+
 点个星星再走吧
 [![Stargazers over time](https://starchart.cc/ImLTHQ/edge-tunnel.svg?variant=adaptive)](https://starchart.cc/ImLTHQ/edge-tunnel)
 
