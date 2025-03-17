@@ -5,6 +5,7 @@
 本人是初学者, 代码有问题欢迎指出
 
 [![Deploy to CF Workers](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/ImLTHQ/edge-tunnel)
+部署Workers请绑定自定义域名
 
 点个星星再走吧
 [![Stargazers over time](https://starchart.cc/ImLTHQ/edge-tunnel.svg?variant=adaptive)](https://starchart.cc/ImLTHQ/edge-tunnel)
@@ -32,20 +33,6 @@
 - 选择`上游同步`
 - 点击`Enable workflow`
 - 这是为了使你的仓库与作者的同步保持最新
-</details>
-
-<details>
-<summary><code><strong>「 绑定自定义域名(可选) 」</strong></code></summary>
-
-CF连接你的域名:
-- 去`账户主页`,选择`域`,输入你的域名,点击`继续`
-- 按照需求选择计划(免费的够用了),点击`继续`,点击`继续前往激活`,点击`确认`
-- 按照CF的要求返回你的域名服务商,将你当前的DNS服务器替换为CF DNS服务器
-
-Pages绑定自定义域名
-- 点击Pages控制台的`自定义域`选项卡,点击`设置自定义域`
-- 填入域名
-- 点击`继续`,点击`激活域`
 </details>
 
 # 变量说明
