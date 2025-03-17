@@ -2,7 +2,7 @@
 
 [简体中文](https://github.com/ImLTHQ/edge-tunnel/blob/main/README.md) | English
 
-This is a script based on the Cloudflare (CF) platform.
+This is a script based on the Cloudflare platform.
 
 I am a beginner, so please feel free to point out any problems with the code.
 
