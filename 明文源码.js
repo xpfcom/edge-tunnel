@@ -416,10 +416,6 @@ dns:
     - 1.1.1.1
     - 2606:4700:4700::1111
 
-geodata-mode: true
-geox-url:
-  geoip: "https://raw.githubusercontent.com/Loyalsoldier/geoip/release/cn.dat"
-
 proxies:
 ${节点配置}
 
@@ -455,7 +451,6 @@ rule-providers:
 rules:
   - GEOIP,LAN,DIRECT
   - GEOIP,CN,DIRECT
-# - GEOIP,CLOUDFLARE,DIRECT
   - RULE-SET,reject-domain,REJECT
   - RULE-SET,reject-ip,REJECT
   - MATCH,🚀 节点选择
