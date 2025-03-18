@@ -108,4 +108,4 @@
 
 ## 感谢
 
-[shulng](https://github.com/shulng), [XIU2](https://github.com/XIU2), [zizifn](https://github.com/zizifn), [cmliu](https://github.com/cmliu), [x0uid](https://github.com/x0uid), [Loyalsoldier](https://github.com/Loyalsoldier)
+[shulng](https://github.com/shulng), [XIU2](https://github.com/XIU2), [zizifn](https://github.com/zizifn), [cmliu](https://github.com/cmliu), [x0uid](https://github.com/x0uid)
