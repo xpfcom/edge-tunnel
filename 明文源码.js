@@ -416,10 +416,6 @@ dns:
     - 1.1.1.1
     - 2606:4700:4700::1111
 
-geodata-mode: true
-geox-url:
-  geoip: "https://raw.githubusercontent.com/Loyalsoldier/geoip/release/cn.dat"
-
 proxies:
 ${节点配置}
 
@@ -437,11 +433,28 @@ ${代理配置}
   proxies:
 ${代理配置}
 
+rule-providers:
+  reject-domain:
+    type: http
+    behavior: domain
+    url: "https://raw.githubusercontent.com/ImLTHQ/SpotifyAdBlock/master/reject-domain.list"
+    path: ./ruleset/reject-domain.yaml
+    interval: 86400
+
+  reject-ip:
+    type: http
+    behavior: ipcidr
+    url: "https://raw.githubusercontent.com/ImLTHQ/SpotifyAdBlock/master/reject-ip.list"
+    path: ./ruleset/reject-ip.yaml
+    interval: 86400
+
 rules:
   - GEOIP,LAN,DIRECT
   - GEOIP,CN,DIRECT
   - GEOSITE,CN,DIRECT
 # - GEOIP,CLOUDFLARE,DIRECT
+  - RULE-SET,reject-domain,REJECT
+  - RULE-SET,reject-ip,REJECT
   - MATCH,🚀 节点选择
 `;
 
